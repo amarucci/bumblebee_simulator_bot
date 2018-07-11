@@ -6,9 +6,13 @@ from secret_vars import TOKEN
 bot = telebot.TeleBot(TOKEN)
 correct_response_ratio = .8 #will respond correctly 80% of the time
 
-f = open("bumblebee.barks")
-barks = [line.strip() for line in f.readlines()]
-f.close()
+def lines_from_file(file):
+    f = open(file)
+    lines = [line.strip() for line in f.readlines()]
+    f.close
+    return lines
+
+barks = lines_from_file("bumblebee.barks")
 
 commands = {
         "sit": lambda : "bumblebee sits",
@@ -19,6 +23,7 @@ commands = {
 
 def kill():
     return "bumblebee enters a blood frenzy. her eyes turn red and roll back into her head. she'll be back in an hour"
+
 
 @bot.message_handler(func=lambda message: True)
 def respond_to_command(message):
